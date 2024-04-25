@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-升级springboot2.2+的异常" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/04/24/%E5%8D%87%E7%BA%A7springboot2.2+%E7%9A%84%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time class="dt-published" datetime="2024-04-24T09:54:49.000Z" itemprop="datePublished">2024-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A7%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/">旧笔记整理</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/04/24/%E5%8D%87%E7%BA%A7springboot2.2+%E7%9A%84%E5%BC%82%E5%B8%B8/">升级springboot2.2+的异常</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="升级环境"><a href="#升级环境" class="headerlink" title="升级环境"></a>升级环境</h3><p>升级前使用的版本：</p>
+<p>spring.cloud：Hoxton.SR8<br>spring-cloud-alibaba：2.2.4.RELEASE<br>spring-boot：2.3.2.RELEASE<br>升级至：</p>
+<p>spring.cloud：2020.0.0<br>spring-cloud-alibaba：2021.1<br>spring-boot：2.4.2</p>
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>1.日志无法打印</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.本地debug模式下无问题</span><br><span class="line">2.服务器启动，只在脚本启动路径下，生成$&#123;sys:LOG_FILE&#125; 文件夹。且日志没有按照配至爱输出</span><br><span class="line"></span><br><span class="line">大量日志在启动脚本时，输出到终端上。且会在日志目录输出 spring.log文件</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">spring.log</span><br><span class="line">排除安静 springboot 默认使用的logbak</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">办法见最后</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>2.WARNING</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">WARNING: Illegal reflective access by javassist.ClassPool (jar:file:/app/acct/java/acct-demo/acct-demo.jar!/BOOT-INF/lib/javassist-3.20.0-GA.jar!/) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)</span><br><span class="line">WARNING: Please consider reporting this to the maintainers of javassist.ClassPool</span><br><span class="line">WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations</span><br><span class="line">WARNING: All illegal access operations will be denied in a future release</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">忽略WARNING  这部分是高版本java对于反射的警告</span><br><span class="line"></span><br><span class="line">--illegal-access=warn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">官方建议 Please try the latest release such as 3.23.1-GA.</span><br><span class="line">事实只升级版本也没用</span><br><span class="line"></span><br><span class="line">笑死了 开发者骂提问题的人</span><br><span class="line">https://github.com/jboss-javassist/javassist/issues/214</span><br><span class="line">https://github.com/jboss-javassist/javassist/issues/145</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个问题 在本项目是因为 dubbo依赖的 javassist版本问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">见 https://github.com/apache/dubbo/issues/7425</span><br><span class="line">https://github.com/apache/dubbo/pull/7516</span><br><span class="line"></span><br><span class="line">最新版dubbo已经修复了该问题</span><br><span class="line">但之前版本 还存在，因此需要手动替换javassist版本</span><br><span class="line">javassist version to 3.23.1-GA</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">将依赖升级为 3.23.1-GA 就不会出现异常</span><br><span class="line">但如果升到最新版3.28.0-GA，还会有异常</span><br><span class="line"></span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;org.javassist&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javassist&lt;/artifactId&gt;</span><br><span class="line">&lt;!--                &lt;version&gt;3.28.0-GA&lt;/version&gt;--&gt;</span><br><span class="line">                &lt;version&gt;3.23.1-GA&lt;/version&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://segon.cn/jackson-objectmapper-enabledefaulttyping-deprecated.html</span><br><span class="line">Jackson ObjectMapper 中的 enableDefaultTyping 方法由于安全原因，从 2.10.0 开始标记为过期，建议用 activateDefaultTyping 方法代替，所以如果继续使用 enableDefaultTyping 会有警告出现</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.WARNING：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">官方说是主流浏览器如谷歌符合正常规范，不需要设置字符编码了</span><br><span class="line"></span><br><span class="line">MediaType.APPLICATION_JSON_UTF8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">虽然会编译启动时  会报WARNING 但为了兼容以前的浏览器  只能无视</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">The POM for com.alibaba:druid:jar:1.2.6 is invalid, transitive dependencies (if any) will not be available</span><br><span class="line"></span><br><span class="line">om.alibaba.druid 这个包应该是使用OpenJDK构建的，所以添加了这两个依赖。</span><br><span class="line">所以导致这个的原因也就明了了</span><br><span class="line">开发环境使用的JDK和 com.alibaba.druid 包不一致；</span><br><span class="line">这是 com.alibaba.druid 的一个bug，未考虑不同JDK环境的影响</span><br><span class="line"></span><br><span class="line">切换到其他版本，如 1.2.5。（已验证）</span><br><span class="line">注释掉这两个依赖。正常开发没有影响。（已验证）</span><br><span class="line">使用OpenJDK。（未验证）</span><br><span class="line"></span><br><span class="line">https://www.cnblogs.com/mayhot/p/15095261.html</span><br><span class="line"></span><br><span class="line">见 https://github.com/alibaba/druid/issues/4305 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.升级版本后 springcloud 不默认加载bootstrap.yml 文件了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bootstrap.yml</span><br><span class="line"></span><br><span class="line">因此 bootstrap.yml 配置直接放入 application.yml 中</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">spring boot2.4之后不需要再新建bootstrap了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>spring-gateway  报错503</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE &quot;Unable to find instance for acct-admin&quot;] for HTTP POST /api/acct/acct</span><br><span class="line"></span><br><span class="line">Completed 503 SERVICE_UNAVAILABLE</span><br><span class="line"></span><br><span class="line">参考 https://blog.csdn.net/alinyua/article/details/80009435</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/actuator/info</span><br><span class="line">只要访问 对应服务的 /actuator/health 不为 up 基本就是503了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">解决：</span><br><span class="line"></span><br><span class="line">需要</span><br><span class="line">        &lt;!--服务监控--&gt;</span><br><span class="line">        &lt;!-- spring-gateway 需要actuator 监控路由服务状态，不加依赖会认为服务不可用503--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于springcloud2020弃用了Ribbon，因此Alibaba在2021版本nacos中删除了Ribbon的jar包，因此无法通过lb路由到指定微服务，出现了503情况。</span><br><span class="line"></span><br><span class="line">所以只需要引入springcloud loadbalancer包即可</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于springcloud2020弃用了Ribbon，因此Alibaba在2021版本nacos中删除了Ribbon的jar包，因此无法通过lb路由到指定微服务，出现了503情况。需要引入springcloud loadbalancer包</span><br><span class="line"></span><br><span class="line">springcloud2020版本gateway+nacos，服务报错503 Service Unavailable</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-loadbalancer&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="8">
+<li>WARNING：No URLs will be polled as dynamic configuration sources</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">参考  https://blog.csdn.net/lizz861109/article/details/105488960</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;spring-cloud-netflix-archaius&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;        </span><br></pre></td></tr></table></figure>
+
+
+
+<p>9.ERROR：PlatformDependent0$6 cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to unnamed module</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DK11使用netty等类库时有时会在DEBUG日志中出现以下错误:</span><br><span class="line">java.lang.UnsupportedOperationException: Reflective setAccessible(true) disabled；</span><br><span class="line">java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent0$6 cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to unnamed module @60438a68；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">虽然不影响正常程序运行，但要解决 可以升级netty依赖  到最新版本</span><br><span class="line"></span><br><span class="line">见 https://stackoverflow.com/questions/57885828/netty-cannot-access-class-jdk-internal-misc-unsafe</span><br><span class="line">正如您所说，这只是一条调试消息，可以忽略。它基本上告诉你 Netty 不能使用“所有优化”，因为它不能访问一个类。如果您愿意，可以在启动应用程序时通过命令行标志打开访问级别。</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-loadbalancer&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="10">
+<li>durid 第二个bug</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">discard long time none received connection. , jdbcUrl : jdbc:mysql://127.0.0.1:3306/acct?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;useAffectedRows=true&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true, version : 1.2.5, lastPacketReceivedIdleMillis : 124501</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考 https://zhuanlan.zhihu.com/p/368683245</span><br><span class="line"></span><br><span class="line">-Ddruid.mysql.usePingMethod=false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">经过排查发现是Druid版本导致的异常，在1.2.2及以前版本并未出现如此异常</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>1.可能输出${sys:LOG_FILE} 的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">见https://stackoverflow.com/questions/31076551/spring-boot-log4j2-2-files-are-generated</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20210903110428987.png" alt="图片" title="图片"></p>
+<ol start="2">
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">见 https://stackoverflow.com/questions/38527175/spring-boot-no-log-file-written-logging-file-is-not-respected</span><br><span class="line"></span><br><span class="line">2.2+。logging.file 在 2.2 中已被弃用 使用logging.file.name</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/image-20210903110236844.png" alt="图片" title="图片"></p>
+<p>3.springboot 官方文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">https://docs.spring.io/spring-boot/docs/</span><br><span class="line"></span><br><span class="line">2.4.2 关于日志的文档</span><br><span class="line">https://docs.spring.io/spring-boot/docs/2.4.2/reference/html/spring-boot-features.html#boot-features-logging</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gateway官网文档</span><br><span class="line">https://docs.spring.io/spring-cloud-gateway/docs/</span><br><span class="line"></span><br><span class="line">https://docs.spring.io/spring-cloud/docs/</span><br><span class="line"></span><br><span class="line">https://docs.spring.io/spring-boot-starter-actuator/docs/</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/04/24/%E5%8D%87%E7%BA%A7springboot2.2+%E7%9A%84%E5%BC%82%E5%B8%B8/" data-id="clvdnye640000u8vrgi2z2mzj" data-title="升级springboot2.2+的异常" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springcloud/" rel="tag">springcloud</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/04/24/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2024-04-24T09:44:34.652Z" itemprop="datePublished">2024-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/04/24/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/04/24/hello-world/" data-id="clvdnye6c0001u8vr5ios4c9v" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A7%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/">旧笔记整理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springcloud/" rel="tag">springcloud</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/04/24/%E5%8D%87%E7%BA%A7springboot2.2+%E7%9A%84%E5%BC%82%E5%B8%B8/">升级springboot2.2+的异常</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/24/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
